@@ -10,7 +10,7 @@ def make_app(command, server_name, debug):
 
     app_py_path = command
 
-    app_log.info("Fetching Plotly Dash script {}".format(app_py_path))
+    print("Fetching Plotly Dash script {}".format(app_py_path))
 
     spec = importlib.util.spec_from_file_location("userscript", app_py_path)
     userscript = importlib.util.module_from_spec(spec)
@@ -31,8 +31,8 @@ def make_app(command, server_name, debug):
 def run(port, ip, server_name, debug, command):
 
     if debug:
-        app_log.info('Setting debug')
         app_log.setLevel(logging.DEBUG)
+        print('Setting debug')
 
     app = make_app(command, server_name, debug)
 
