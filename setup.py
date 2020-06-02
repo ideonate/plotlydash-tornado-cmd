@@ -12,7 +12,7 @@ install_requires = [e.strip() for e in li_req if len(e)]
 
 setuptools.setup(
     name="plotlydash-tornado-cmd",
-    version="0.0.1",
+    version="0.0.2",
     author="Dan Lester",
     author_email="dan@ideonate.com",
     description="Command line wrapper to run a named Plotly Dash script inside a Tornado server",

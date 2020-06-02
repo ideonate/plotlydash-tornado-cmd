@@ -1,10 +1,12 @@
+import os
+import logging
+import importlib.util
+
 from tornado.httpserver import HTTPServer
 from tornado import ioloop
 from tornado.wsgi import WSGIContainer
 from tornado.log import app_log
 import click
-import logging
-import importlib.util
 
 def make_app(command, server_name, debug):
 
@@ -12,7 +14,19 @@ def make_app(command, server_name, debug):
 
     print("Fetching Plotly Dash script {}".format(app_py_path))
 
-    spec = importlib.util.spec_from_file_location("userscript", app_py_path)
+    dirname = os.path.dirname(app_py_path)
+
+    basename = os.path.basename(app_py_path)
+
+    (scriptname, _) = os.path.splitext(basename)
+
+    print("CWD to {}".format(dirname))
+
+    os.chdir(dirname)
+
+    print("Importing user Dash app")
+
+    spec = importlib.util.spec_from_file_location(scriptname, app_py_path)
     userscript = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(userscript)
 
@@ -44,4 +58,10 @@ def run(port, ip, server_name, debug, command):
 
 
 if __name__ == '__main__':
-    run()
+
+    try:
+
+        run()
+
+    except SystemExit as se:
+        print('Caught SystemExit {}'.format(se))
