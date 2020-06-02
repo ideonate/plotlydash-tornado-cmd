@@ -10,7 +10,8 @@ import click
 
 def make_app(command, server_name, debug):
 
-    app_py_path = command
+    # Command can be absolute, or could be relative to cwd
+    app_py_path = os.path.join(os.getcwd(), command)
 
     print("Fetching Plotly Dash script {}".format(app_py_path))
 
