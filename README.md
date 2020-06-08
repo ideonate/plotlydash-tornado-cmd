@@ -20,7 +20,12 @@ The file to start is specified on the command line, for example:
 plotlydash-tornado-cmd ~/Dev/mydashscript.py
 ```
 
-By default the server will listen on port 8888, importing the Dash app named 'app'. This is equivalent to:
+By default the server will listen on port 8888, importing the Dash app named 'app', or locating the first dash.Dash 
+object that it can find otherwise.
+
+To specify a different port, use the --port flag.
+
+To explicitly specify the name of your dash.Dash app, use the --server-name flag.
 
 ```
 plotlydash-tornado-cmd --server-name=app --port=8888 ~/Dev/mydashscript.py
