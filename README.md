@@ -32,3 +32,7 @@ plotlydash-tornado-cmd --server-name=app --port=8888 ~/Dev/mydashscript.py
 ```
 
 To run directly in python: `python -m plotlydash_tornado_cmd.main <rest of command line>`
+
+## Changelog
+
+- v0.0.6 Change CWD to script's folder, and also add that folder to the Python search path.

@@ -1,6 +1,7 @@
 import os
 import logging
 import importlib.util
+import sys
 
 from tornado.httpserver import HTTPServer
 from tornado import ioloop
@@ -24,9 +25,12 @@ def make_app(command, server_name=None, debug=False):
 
     (scriptname, _) = os.path.splitext(basename)
 
-    print("CWD to {}".format(dirname))
+    if os.path.isdir(dirname):
+        print("CWD to {}".format(dirname))
+        os.chdir(dirname)
 
-    os.chdir(dirname)
+        # Add script's folder to Python search path too
+        sys.path.append(dirname)
 
     print("Importing user Dash app")
 
